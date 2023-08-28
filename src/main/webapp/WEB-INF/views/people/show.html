@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Людина</title>
+</head>
+<body>
+<p th:text="${person.getFullName() + ', ' + person.getDate()}">VALUE</p>
+<p th:text="${person.getId()}">VALUE</p>
+<div th:if="${books.isEmpty()}">Людина не взяла ні однієї книги</div>
+
+<div th:each="book : ${books}">
+    <p>Назва книги: <span th:text="${book.getName_book()}">Назва книги</span></p>
+    <p>Автор: <span th:text="${book.author}">Автор книги</span></p>
+</div>
+<!--<div th:unless="${books.isEmpty()}">-->
+<!--    <p> Список книг, які взята людиною:</p>-->
+<!--    <label for="bookList">Виберіть людину</label>-->
+<!--    <select th:object="${book}" th:field="*{book_id}" id="bookList">-->
+<!--        <option th:each="books : ${bookOwn}" th:value="${books.getBook_id()}"-->
+<!--                th:text="${books.getName_book()}"></option>-->
+
+<!--    </select>-->
+<!--</div>-->
+
+<!--<div th:if="${not books.isEmpty()}" th:each="booker : ${bookses}">-->
+<!--    <a th:text="${booker.}" th:href="@{/books/{id}(id=${book.})}"></a>-->
+<!--</div>-->
+
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete">
+
+</form>
+</body>
+</html>
