@@ -1,24 +1,45 @@
 package org.example.models;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "Book")
 public class Book {
 
+    @Id
+    @Column(name = "book_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int book_id;
 //    private int person_id;
     @NotEmpty(message = "поле повинно бути заповнене")
     @Size(max = 100, message = "Розмір повинен бути не більше 100 символів")
+    @Column(name = "name_book")
     private String name_book;
     @NotEmpty(message = "поле повинно бути заповнене")
     @Size(min = 20, max = 200, message = "Поле повинно бути мінімум від 20 до 200 символів")
     @Pattern(regexp = "[А-ЯІЇЄҐ][а-яіїєґ']+ [А-ЯІЇЄҐ][а-яіїєґ']+ [А-ЯІЇЄҐ][а-яіїєґ']+$", message = "повинно бути у формати Прізвище Ім'я По батькові")
+    @Column(name = "author")
     private String author;
     @NotEmpty(message = "поле повинно бути заповнене")
     @Size(max = 50, message = "Розмір повинен бути не більше 50 символів")
     @Pattern(regexp = "(0[1-9]|[12]\\d|3[01])\\.(0[1-9]|1[0-2])\\.\\d{4}$", message = "поле повинно бути у форматі день.місяць.рік (01.02.2001)")
+    @Column(name = "date")
     private String date;
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
 
     public Book() {
     }
