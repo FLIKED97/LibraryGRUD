@@ -2,33 +2,46 @@ package org.example.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+// Define the Book entity class and specify it is a JPA entity
 @Entity
 @Table(name = "Book")
 public class Book {
 
+    // Define the primary key and specify it should be auto-generated
     @Id
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int book_id;
-//    private int person_id;
+
+    // Define the name of the book with validation constraints
     @NotEmpty(message = "поле повинно бути заповнене")
     @Size(max = 100, message = "Розмір повинен бути не більше 100 символів")
     @Column(name = "name_book")
     private String name_book;
+
+    // Define the author of the book with validation constraints
     @NotEmpty(message = "поле повинно бути заповнене")
-    @Size(min = 20, max = 200, message = "Поле повинно бути мінімум від 20 до 200 символів")
-    @Pattern(regexp = "[А-ЯІЇЄҐ][а-яіїєґ']+ [А-ЯІЇЄҐ][а-яіїєґ']+ [А-ЯІЇЄҐ][а-яіїєґ']+$", message = "повинно бути у формати Прізвище Ім'я По батькові")
+    //@Size(min = 20, max = 200, message = "Поле повинно бути мінімум від 20 до 200 символів")
     @Column(name = "author")
     private String author;
+
+    // Define the publication date of the book with validation constraints
     @NotEmpty(message = "поле повинно бути заповнене")
     @Size(max = 50, message = "Розмір повинен бути не більше 50 символів")
-    @Pattern(regexp = "(0[1-9]|[12]\\d|3[01])\\.(0[1-9]|1[0-2])\\.\\d{4}$", message = "поле повинно бути у форматі день.місяць.рік (01.02.2001)")
+    //@Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}", message = "поле повинно бути у форматі день.місяць.рік (01.02.2001)")
     @Column(name = "date")
     private String date;
 
+    // Define the relationship with the Person entity (many books can belong to one person)
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
+
+    // Getter and setter for owner
     public Person getOwner() {
         return owner;
     }
@@ -37,9 +50,6 @@ public class Book {
         this.owner = owner;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person owner;
 
     public Book() {
     }

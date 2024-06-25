@@ -4,6 +4,7 @@ import org.example.models.Book;
 import org.example.models.Person;
 import org.example.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,9 @@ public class BookService {
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
-
+    public Page<Book> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
+    }
     public Book findOne(int id) {
         Optional<Book> foundPerson = bookRepository.findById(id);
         return foundPerson.orElse(null);
@@ -53,27 +56,22 @@ public class BookService {
 
     @Transactional
     public void addBookToPerson(Person person, int bookId) {
-        Optional<Book> bookOptional = bookRepository.findById(bookId);
-        if (bookOptional.isPresent()) {
-            Book book = bookOptional.get();
-            book.setOwner(person);
-            bookRepository.save(book);
-        } else {
-            // Обробка випадку, коли книга не знайдена
-            throw new RuntimeException("Book with id " + bookId + " not found");
-        }
+        // Retrieve the book by its ID
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        // Set the person to the book
+        book.setOwner(person);
+        // Save the updated book entity
+        bookRepository.save(book);
     }
 
     @Transactional
     public void deleteBookForPerson(int bookId) {
-        Optional<Book> bookOptional = bookRepository.findById(bookId);
-        if (bookOptional.isPresent()) {
-            Book book = bookOptional.get();
-            book.setOwner(null);
-            bookRepository.save(book);
-        } else {
-            // Обробка випадку, коли книга не знайдена
-            throw new RuntimeException("Book with id " + bookId + " not found");
-        }
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        book.setOwner(null);
+        bookRepository.save(book);
+    }
+
+    public List<Book> findAll(Sort year) {
+        return bookRepository.findAll(year);
     }
 }

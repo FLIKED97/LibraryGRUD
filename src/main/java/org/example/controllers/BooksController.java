@@ -7,6 +7,10 @@ import org.example.models.Person;
 import org.example.services.BookService;
 import org.example.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,26 +32,44 @@ public class BooksController {
     }
 
     @GetMapping()
-    public String index(Model model){
-        model.addAttribute("books", bookService.findAll());
+    public String index(@RequestParam(value = "page", required = false) Integer page,
+                        @RequestParam(value = "books_per_page", required = false) Integer booksPerPage,
+                        Model model) {
+        if (page != null && booksPerPage != null) {
+            model.addAttribute("books",bookService.findAll(PageRequest.of(page, booksPerPage, Sort.by("date"))).getContent());
+        } else {
+            model.addAttribute("books", bookService.findAll());
+        }
         return "books/books";
     }
 
+//    @GetMapping("/{id}")
+//    public String show(@PathVariable("id") int id, Model model,
+//                       @ModelAttribute("person") Person person) {
+//
+//        model.addAttribute("book", bookService.findOne(id));
+//
+//        Optional<Person> bookOwner = bookService.getBookOwner(id);
+//
+//        if(bookOwner.isPresent()){
+//            model.addAttribute("owner", bookOwner.get());
+//        } else {
+//            model.addAttribute("people", bookService.findAll());
+//        }
+//
+//        //model.addAttribute("person", )
+//        return "books/show";
+//    }
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model,
-                       @ModelAttribute("person") Person person) {
-
+    public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("book", bookService.findOne(id));
 
         Optional<Person> bookOwner = bookService.getBookOwner(id);
-
-        if(bookOwner.isPresent()){
+        if (bookOwner.isPresent()) {
             model.addAttribute("owner", bookOwner.get());
         } else {
-            model.addAttribute("people", bookService.findAll());
+            model.addAttribute("people", personService.findAll());
         }
-
-        //model.addAttribute("person", )
         return "books/show";
     }
     @GetMapping("/new")
