@@ -3,6 +3,7 @@ package org.example.services;
 import org.example.models.Book;
 import org.example.models.Person;
 import org.example.repositories.BookRepository;
+import org.example.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,12 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
+    private final PersonRepository personRepository;
+
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, PersonRepository personRepository) {
         this.bookRepository = bookRepository;
+        this.personRepository = personRepository;
     }
     public List<Book> findAll() {
         return bookRepository.findAll();
@@ -73,5 +77,14 @@ public class BookService {
 
     public List<Book> findAll(Sort year) {
         return bookRepository.findAll(year);
+    }
+
+
+    public Optional<Book> searchBookByName(String name){
+        return bookRepository.findByNameBookStartingWithIgnoreCase(name);
+    }
+
+    public Person findBookOwner(Book book) {
+        return personRepository.findBookOwner(book);
     }
 }

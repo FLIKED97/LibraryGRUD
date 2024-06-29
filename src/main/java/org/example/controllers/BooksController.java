@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -42,24 +43,6 @@ public class BooksController {
         }
         return "books/books";
     }
-
-//    @GetMapping("/{id}")
-//    public String show(@PathVariable("id") int id, Model model,
-//                       @ModelAttribute("person") Person person) {
-//
-//        model.addAttribute("book", bookService.findOne(id));
-//
-//        Optional<Person> bookOwner = bookService.getBookOwner(id);
-//
-//        if(bookOwner.isPresent()){
-//            model.addAttribute("owner", bookOwner.get());
-//        } else {
-//            model.addAttribute("people", bookService.findAll());
-//        }
-//
-//        //model.addAttribute("person", )
-//        return "books/show";
-//    }
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("book", bookService.findOne(id));
@@ -127,4 +110,24 @@ public class BooksController {
 
         return "redirect:/books/{id}";
     }
+
+    @GetMapping("/search")
+    public String showSearchPage(Model model) {
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String searchBook(@RequestParam("name") String name, Model model) {
+        Optional<Book> bookOptional = bookService.searchBookByName(name);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            model.addAttribute("book", book);
+            model.addAttribute("bookFound", true);
+            model.addAttribute("bookOwner", bookService.findBookOwner(book));
+        } else {
+            model.addAttribute("bookFound", false);
+        }
+        return "books/search";
+    }
+
 }

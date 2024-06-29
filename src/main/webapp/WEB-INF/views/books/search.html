@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Книга</title>
+    <title>Search Book</title>
 </head>
 <body>
-
+<h1>Search Book</h1>
+<form action="#" th:action="@{/books/search}" th:method="post">
+    <label for="name">Book Name:</label>
+    <input type="text" id="name" name="name" />
+    <button type="submit">Search</button>
+</form>
+<div th:if="${bookFound}">
+    <h2>Book Details</h2>
+    <p>Title: <span th:text="${book.nameBook}"></span></p>
+    <p>Year: <span th:text="${book.date}"></span></p>
+    <div th:if="${bookOwner != null}">
+        <h3>Owner Details</h3>
+        <p>Name: <span th:text="${bookOwner.fullName}"></span></p>
+    </div>
+    <div th:if="${bookOwner == null}">
+        <p>The book is available.</p>
+    </div>
+</div>
 </body>
 </html>

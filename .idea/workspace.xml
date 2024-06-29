@@ -9,13 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="558ed88e-2161-4770-8b44-7665579815ef" name="Changes" comment="redo the project using hibernate/jpa">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" afterDir="false" />
+    <list default="true" id="558ed88e-2161-4770-8b44-7665579815ef" name="Changes" comment="ADD PaginationAndSorting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/BooksController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/BookRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/books.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/books.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/books/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +200,11 @@
       <workItem from="1719167869596" duration="9145000" />
       <workItem from="1719224969432" duration="2043000" />
       <workItem from="1719332668337" duration="3709000" />
-      <workItem from="1719345794480" duration="1529000" />
+      <workItem from="1719345794480" duration="1576000" />
+      <workItem from="1719348238314" duration="1373000" />
+      <workItem from="1719407526280" duration="1370000" />
+      <workItem from="1719417281001" duration="5611000" />
+      <workItem from="1719677409221" duration="1677000" />
     </task>
     <task id="LOCAL-00001" summary="first GRUD project with pattern DAO">
       <created>1693236079402</created>
@@ -212,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719179109296</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ADD PaginationAndSorting">
+      <created>1719347348093</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719347348093</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +247,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first GRUD project with pattern DAO" />
     <MESSAGE value="redo the project using hibernate/jpa" />
-    <option name="LAST_COMMIT_MESSAGE" value="redo the project using hibernate/jpa" />
+    <MESSAGE value="ADD PaginationAndSorting" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD PaginationAndSorting" />
   </component>
 </project>

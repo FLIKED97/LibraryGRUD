@@ -21,7 +21,7 @@ public class Book {
     @NotEmpty(message = "поле повинно бути заповнене")
     @Size(max = 100, message = "Розмір повинен бути не більше 100 символів")
     @Column(name = "name_book")
-    private String name_book;
+    private String nameBook;
 
     // Define the author of the book with validation constraints
     @NotEmpty(message = "поле повинно бути заповнене")
@@ -54,11 +54,19 @@ public class Book {
     public Book() {
     }
 
-    public Book(int book_id, String name_book, String author, String date) {
+    public Book(int book_id, String nameBook, String author, String date) {
         this.book_id = book_id;
-        this.name_book = name_book;
+        this.nameBook = nameBook;
         this.author = author;
         this.date = date;
+    }
+
+    public String getNameBook() {
+        return nameBook;
+    }
+
+    public void setNameBook(String nameBook) {
+        this.nameBook = nameBook;
     }
 
     public String getDate() {
@@ -77,21 +85,6 @@ public class Book {
         this.book_id = book_id;
     }
 
-//    public int getPerson_id() {
-//        return person_id;
-//    }
-//
-//    public void setPerson_id(int person_id) {
-//        this.person_id = person_id;
-//    }
-
-    public String getName_book() {
-        return name_book;
-    }
-
-    public void setName_book(String name_book) {
-        this.name_book = name_book;
-    }
 
     public String getAuthor() {
         return author;

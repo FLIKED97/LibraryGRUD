@@ -8,8 +8,8 @@
 
 <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBook_id()})}" th:object="${book}">
   <label for="name_book">Enter name:</label>
-  <input type="text" th:field="*{name_book}" id="name_book"/>
-  <div style="color: red" th:if="${#fields.hasErrors('name_book')}" th:errors="*{name_book}" >Name error</div>
+  <input type="text" th:field="*{nameBook}" id="name_book"/>
+  <div style="color: red" th:if="${#fields.hasErrors('name_book')}" th:errors="*{nameBook}" >Name error</div>
 
   <br/>
     <label for="date">Enter age:</label>
