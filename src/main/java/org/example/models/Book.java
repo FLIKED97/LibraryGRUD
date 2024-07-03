@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 // Define the Book entity class and specify it is a JPA entity
 @Entity
@@ -35,6 +36,14 @@ public class Book {
     //@Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}", message = "поле повинно бути у форматі день.місяць.рік (01.02.2001)")
     @Column(name = "date")
     private String date;
+
+    @Column(name = "borrowed_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date borrowedDate;
+
+    @Column(name = "temporaryBool")
+    @Transient
+    private Boolean temporaryBool;
 
     // Define the relationship with the Person entity (many books can belong to one person)
     @ManyToOne
@@ -94,4 +103,27 @@ public class Book {
         this.author = author;
     }
 
+    public Date getBorrowedDate() {
+        return borrowedDate;
+    }
+
+    public void setBorrowedDate(Date borrowedDate) {
+        this.borrowedDate = borrowedDate;
+    }
+
+    public Boolean getTemporaryBool() {
+        return temporaryBool;
+    }
+
+    public void setTemporaryBool(Boolean temporaryBool) {
+        this.temporaryBool = temporaryBool;
+    }
+    public boolean isOverdue() {
+        long diffDays = (new Date().getTime() - getBorrowedDate().getTime()) / (24 * 60 * 60 * 100);
+        return diffDays >= 10;
+    }
+
+    public String getTextColor() {
+        return isOverdue() ? "color:red" : "color:black"; //true - red; false - black
+    }
 }

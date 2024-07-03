@@ -1,7 +1,5 @@
 package org.example.controllers;
 
-import org.example.dao.BookDao;
-import org.example.dao.PersonDao;
 import org.example.models.Person;
 import org.example.services.BookService;
 import org.example.services.PersonService;

@@ -9,6 +9,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,7 @@ public class BookService {
         Optional<Book> foundPerson = bookRepository.findById(id);
         return foundPerson.orElse(null);
     }
+    @Transactional
     public List<Book> getBooksByPersonId(int personId) {
         return bookRepository.findByOwner_Id(personId);
     }
@@ -64,6 +66,9 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
         // Set the person to the book
         book.setOwner(person);
+
+        book.setBorrowedDate(new Date());
+
         // Save the updated book entity
         bookRepository.save(book);
     }

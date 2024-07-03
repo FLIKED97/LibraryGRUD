@@ -10,9 +10,14 @@
 <div th:if="${books.isEmpty()}">Людина не взяла ні однієї книги</div>
 
 <div th:each="book : ${books}">
-    <p>Назва книги: <span th:text="${book.getName_book()}">Назва книги</span></p>
-    <p>Автор: <span th:text="${book.author}">Автор книги</span></p>
+    <div th:style="${book.getTextColor()}">
+        <p>Назва книги: <span th:text="${book.getNameBook()}">Назва книги</span></p>
+        <p>Автор: <span th:text="${book.author}">Автор книги</span></p>
+    </div>
 </div>
+
+
+
 <!--<div th:unless="${books.isEmpty()}">-->
 <!--    <p> Список книг, які взята людиною:</p>-->
 <!--    <label for="bookList">Виберіть людину</label>-->
